@@ -1,0 +1,27 @@
+{
+  "name": "electron-text-editor",
+  "version": "0.1.0-SNAPSHOT",
+  "description": "Simple Text Editor with Electron",
+  "main": "index.js",
+  "scripts": {
+    "test": "tyu"
+  },
+  "keywords": [
+    "text",
+    "editor",
+    "markdown",
+    "codemirror"
+  ],
+  "author": "Hasan TEKGÜL <hasan.tekgul@tuik.gov.tr>",
+  "license": "MIT",
+  "devDependencies": {
+    "electron-builder": "^20.5.1",
+    "poi": "^9.6.13",
+    "poi-preset-react": "^9.2.1",
+    "tyu": "^1.0.6"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
+}
