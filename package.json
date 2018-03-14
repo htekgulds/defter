@@ -2,9 +2,17 @@
   "name": "electron-text-editor",
   "version": "0.1.0-SNAPSHOT",
   "description": "Simple Text Editor with Electron",
-  "main": "index.js",
+  "main": "dist/electron.js",
   "scripts": {
-    "test": "tyu"
+    "test": "tyu",
+    "electron:dev": "concurrently 'npm start' 'wait-on http://localhost:4000 && electron static/electron.js'",
+    "start": "poi",
+    "build": "poi build",
+    "preelectron:pack": "npm run build",
+    "preelectron:dist": "npm run build",
+    "electron:dist": "electron-builder",
+    "electron:pack": "electron-builder --dir",
+    "postinstall": "electron-builder install-app-deps"
   },
   "keywords": [
     "text",
@@ -15,13 +23,23 @@
   "author": "Hasan TEKGÜL <hasan.tekgul@tuik.gov.tr>",
   "license": "MIT",
   "devDependencies": {
+    "concurrently": "^3.5.1",
+    "electron": "^1.8.3",
     "electron-builder": "^20.5.1",
     "poi": "^9.6.13",
     "poi-preset-react": "^9.2.1",
-    "tyu": "^1.0.6"
+    "tyu": "^1.0.6",
+    "wait-on": "^2.1.0"
   },
   "dependencies": {
+    "electron-is-dev": "^0.3.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
+  },
+  "build": {
+    "appId": "com.devtekgul.editor",
+    "directories": {
+      "output": "electron"
+    }
   }
 }
