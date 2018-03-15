@@ -1,14 +1,16 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
-const url = require('url')
 const isDev = require('electron-is-dev')
 
 let mainWindow
 
 function createWindow () {
-  mainWindow = new BrowserWindow({width: 900, height: 680})
+  mainWindow = new BrowserWindow({width: 900, height: 680, show: false})
   mainWindow.loadURL(isDev ? 'http://localhost:4000' : path.join('file://', __dirname, '../dist/index.html'))
   mainWindow.on('closed', () => mainWindow = null)
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show()
+  })
 }
 
 app.on('ready', createWindow)
