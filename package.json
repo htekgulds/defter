@@ -32,9 +32,11 @@
     "wait-on": "^2.1.0"
   },
   "dependencies": {
+    "@blueprintjs/core": "^2.0.0-rc.3",
     "electron-is-dev": "^0.3.0",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-transition-group": "^2.2.1"
   },
   "build": {
     "appId": "com.devtekgul.editor",
