@@ -2,14 +2,13 @@ import React from 'react'
 import {ipcRenderer} from 'electron'
 
 import styles from './App.module.css'
-import Codemirror from './editor/Codemirror'
+import Codemirror from 'react-codemirror'
 
 require('codemirror/mode/markdown/markdown')
 
 export default class App extends React.Component {
   state = {
-    data: 'No Content Yet...',
-    mode: 'markdown'
+    data: 'No Content Yet...'
   }
 
   componentDidMount() {
@@ -28,11 +27,19 @@ export default class App extends React.Component {
   }
 
   render() {
+    const options = {
+      lineNumbers: true,
+      mode: 'markdown'
+    }
+
     return (
       <main className={styles.main}>
         <h1 style={{textAlign: 'center'}}>Electron Text Editor</h1>
         <div className={styles.editor}>
-          <Codemirror defaultValue={this.state.data} options={{lineNumbers: true, mode: this.state.mode}}/>
+          <Codemirror ref={node => this.editor = node}
+                      codeMirrorInstance={require('codemirror')}
+                      defaultValue={this.state.data}
+                      options={options}/>
         </div>
       </main>
     )
