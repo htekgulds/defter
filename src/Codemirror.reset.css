@@ -1,5 +1,9 @@
 /* Blueprint.js bazı elemanalrı bozuyor.. */
 
-.CodeMirror pre {
-    box-shadow: none;
+.markdown-editor {
+    height: 100%;
+}
+
+.markdown-editor .CodeMirror {
+    height: 100%;
 }
