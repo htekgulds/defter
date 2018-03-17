@@ -1,8 +1,21 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
+const fs = require('fs')
+const {ipcMain} = require('electron')
 
 let mainWindow
+
+ipcMain.on('open-file', (event) => {
+  fs.readFile(path.resolve('/home/hasantekgul', 'deneme.txt'), 'utf8', (err, data) => {
+    if (err) {
+      event.sender.send('file-open-error', err)
+      return
+    }
+    // If no error
+    event.sender.send('file-opened', data)
+  })
+})
 
 function createWindow () {
   mainWindow = new BrowserWindow({width: 900, height: 680, show: false})
