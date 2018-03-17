@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@blueprintjs/core": "^2.0.0-rc.3",
+    "codemirror": "^5.35.0",
     "electron-is-dev": "^0.3.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

@@ -1,0 +1,5 @@
+/* Blueprint.js bazı elemanalrı bozuyor.. */
+
+.CodeMirror pre {
+    box-shadow: none;
+}

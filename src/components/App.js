@@ -2,10 +2,14 @@ import React from 'react'
 import {ipcRenderer} from 'electron'
 
 import styles from './App.module.css'
+import Codemirror from './editor/Codemirror'
+
+require('codemirror/mode/markdown/markdown')
 
 export default class App extends React.Component {
   state = {
-    data: 'No Content Yet...'
+    data: 'No Content Yet...',
+    mode: 'markdown'
   }
 
   componentDidMount() {
@@ -26,9 +30,9 @@ export default class App extends React.Component {
   render() {
     return (
       <main className={styles.main}>
-        <h1>Hello Electron Editor!</h1>
-        <div>
-          {this.state.data}
+        <h1 style={{textAlign: 'center'}}>Electron Text Editor</h1>
+        <div className={styles.editor}>
+          <Codemirror defaultValue={this.state.data} options={{lineNumbers: true, mode: this.state.mode}}/>
         </div>
       </main>
     )
