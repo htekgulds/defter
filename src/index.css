@@ -1,3 +1,4 @@
 @import "~normalize.css/normalize.css";
 @import "~codemirror/lib/codemirror.css";
+@import "~codemirror/theme/oceanic-next.css";
 @import "Codemirror.reset.css";
