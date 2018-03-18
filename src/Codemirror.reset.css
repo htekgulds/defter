@@ -7,3 +7,11 @@
 .markdown-editor .CodeMirror {
     height: 100%;
 }
+
+.markdown-editor .cm-s-oceanic-next .CodeMirror-gutters {
+    background: rgba(101, 115, 126, 0.33);
+}
+
+.markdown-editor .cm-s-oceanic-next .CodeMirror-line {
+    /*background: #48646b;*/
+}

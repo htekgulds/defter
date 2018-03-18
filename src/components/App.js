@@ -2,29 +2,31 @@ import React from 'react'
 import { ipcRenderer } from 'electron'
 import Codemirror from 'react-codemirror'
 
-require('codemirror/mode/markdown/markdown')
+require('codemirror/mode/javascript/javascript')
+require('codemirror/addon/selection/active-line')
 
 export default class App extends React.Component {
   state = {
-    data: 'No Content Yet...'
+    data: null,
+    height: window.innerHeight
   }
 
   updateCode = (code) => {
     this.setState({
-      data: code,
-      height: window.innerHeight
+      data: code
     })
   }
 
-  componentDidMount () {
+  updateHeightOnResize = () => {
     window.onresize = (e) => {
       this.setState({
         height: window.innerHeight
       })
     }
-    this.setState({
-      height: window.innerHeight
-    })
+  }
+
+  componentDidMount () {
+    this.updateHeightOnResize()
     ipcRenderer.send('open-file')
     ipcRenderer.on('file-opened', (event, arg) => {
       this.editor
@@ -32,16 +34,18 @@ export default class App extends React.Component {
         .setValue(arg)
     })
     ipcRenderer.on('file-open-error', (event, arg) => {
-      this.editor
-        .getCodeMirror()
-        .setValue(arg)
+      window.alert('Dosya açılırken hata oluştu: ' + JSON.stringify(arg))
     })
   }
 
   render () {
     const options = {
       lineNumbers: true,
-      mode: 'markdown'
+      mode: 'javascript',
+      theme: 'oceanic-next',
+      autofocus: true,
+      dragDrop: false,
+      styleActiveLine: true
     }
 
     return (
@@ -51,6 +55,7 @@ export default class App extends React.Component {
                       className="markdown-editor"
                       codeMirrorInstance={require('codemirror')}
                       defaultValue={this.state.data}
+                      onChange={this.updateCode}
                       options={options}/>
         </div>
       </main>
