@@ -1,27 +1,28 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
-const fs = require('fs')
 const {ipcMain} = require('electron')
+
+const {openFile} = require('./helpers/fileHelper')
 
 let mainWindow
 
 ipcMain.on('open-file', (event) => {
-  // const cwd = process.argv[0]
   const file = process.argv[1]
-
-  fs.readFile(path.resolve(file), 'utf8', (err, data) => {
-    if (err) {
-      event.sender.send('file-open-error', err)
-      return
-    }
-    // If no error
-    event.sender.send('file-opened', data)
-  })
+  if (file) {
+    openFile(file, (err, data) => {
+      if (err) {
+        event.sender.send('file-open-error', err)
+        return
+      }
+      // If no error
+      event.sender.send('file-opened', data)
+    })
+  }
 })
 
 function createWindow () {
-  mainWindow = new BrowserWindow({width: 900, height: 680, show: false})
+  mainWindow = new BrowserWindow({width: 1024, height: 768, show: false})
   mainWindow.loadURL(isDev ? 'http://localhost:4000' : path.join('file://', __dirname, '../dist/index.html'))
   mainWindow.on('closed', () => mainWindow = null)
   mainWindow.once('ready-to-show', () => {
