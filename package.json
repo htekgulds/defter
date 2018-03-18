@@ -1,6 +1,7 @@
 {
   "name": "electron-text-editor",
   "version": "0.1.0-SNAPSHOT",
+  "homepage": "http://github.com/htekgulds/defter",
   "description": "Simple Text Editor with Electron",
   "main": "dist/electron.js",
   "scripts": {
@@ -42,6 +43,9 @@
   },
   "build": {
     "appId": "com.devtekgul.editor",
+    "linux": {
+      "target": "deb"
+    },
     "directories": {
       "output": "electron"
     }
