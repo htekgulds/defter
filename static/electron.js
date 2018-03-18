@@ -7,7 +7,10 @@ const {ipcMain} = require('electron')
 let mainWindow
 
 ipcMain.on('open-file', (event) => {
-  fs.readFile(path.resolve('/home/hasantekgul', 'deneme.txt'), 'utf8', (err, data) => {
+  // const cwd = process.argv[0]
+  const file = process.argv[1]
+
+  fs.readFile(path.resolve(file), 'utf8', (err, data) => {
     if (err) {
       event.sender.send('file-open-error', err)
       return
